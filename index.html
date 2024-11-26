@@ -9,15 +9,16 @@
 </head>
 
 <body class="bg-light">
-
+    <!--Corpo principal da pagina-->
     <div class="container mt-5">
+        <!--Imagem do perfil-->
         <div class="card" id="profileCard">
             <div class="card-body text-center">
-                <img src="https://via.placeholder.com/150" alt="Imagem de Perfil" itemref="profileImagem"
-                    class="rounded-circle mb-3" style="width: 150px;" id="imagemPerfil">
-                <h3 id="profileName">Nome: Meu Perfil</h3>
-                <p id="profileAge">Idade: 18</p>
+                <img src="https://via.placeholder.com/150" alt="Imagem de Perfil" itemref="profileImagem" class="rounded-circle mb-3" style="width: 150px;" id="imagemPerfil"> 
+                <h3 id="profileName">Nome: Meu Perfil</h3> <!--Nome-->
+                <p id="profileAge">Idade: 18</p> <!--Idade-->
 
+                <!--Lista de hobbies-->
                 <h5>Hobbies:</h5>
                 <ul id="hobbieList" class="list-group mb-3">
                     <li class="list-group-item">Leitura</li>
@@ -25,70 +26,77 @@
                     <li class="list-group-item">Música</li>
                 </ul>
 
+                <!--Botões para fazer alterações na lista de hobbies-->
                 <button class="btn btn-primary me-2" onclick="alterarNome()">Alterar Nome</button>
                 <button class="btn btn-success me-2" onclick="adicionarHobbie()">Adicionar Hobbie</button>
                 <button class="btn btn-warning me-2" onclick="mudarCorDeFundo()">Mudar Cor de Fundo</button>
-                <button class="btn btn-danger me-2" onclick="trocaFoto()">Mudar Imagem de Fundo</button>
+                <button class="btn btn-danger me-2" onclick="trocaFoto()">Imagem do Usuário</button>
                 <button class="btn btn-secondary me-2" onclick="resetarPagina()">Resetar Página</button>
             </div>
         </div>
     </div>
 
     <script>
+        //Alterar o nome do usuário
         function alterarNome() {
-            const novoNome = prompt("Digite o novo Nome: ");
-            if (novoNome) {
-                document.getElementById("profileName").textContent = "Nome: " + novoNome;
+            const novoNome = prompt("Digite o novo Nome: "); //prompt para o nome do usuário
+            if (novoNome) { //se o novo nome for detectado execute:
+                document.getElementById("profileName").textContent = "Nome: " + novoNome; //mudar o nome 
             }
         }
 
+        //Adiciona um novo hobby
         function adicionarHobbie() {
-            const novoHobby = prompt("Digite um novo hobby:");
-            if (novoHobby) {
-                const li = document.createElement("li");
-                li.textContent = novoHobby;
-                li.className = "list-group-item";
-                adicionarEventosHobbie(li);
-                document.getElementById("hobbieList").appendChild(li);
+            const novoHobby = prompt("Digite um novo hobby:"); //prompt para o nome do novo hobby
+            if (novoHobby) { //se o novo hobby detectado execute:
+                const li = document.createElement("li"); //cria um novo item de lista
+                li.textContent = novoHobby; //muda o conteudo do novo item para o nome colocado no prompt
+                li.className = "list-group-item"; //muda a classe
+                adicionarEventosHobbie(li); //executa a função para adicionar as ações ao novo hobby
+                document.getElementById("hobbieList").appendChild(li); //da um appendChild no li
             }
         }
 
+        //Muda a cor de funda da caixa principal
         function mudarCorDeFundo() {
-            const cores = ["#f8d7da", "#d1ecf1", "#d4edda", "#fff3cd", "#cce5ff"];
-            const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
-            document.getElementById("profileCard").style.backgroundColor = corAleatoria;
+            const cores = ["#f8d7da", "#d1ecf1", "#d4edda", "#fff3cd", "#cce5ff"]; //array de cores para ser usada 
+            const corAleatoria = cores[Math.floor(Math.random() * cores.length)]; //seleciona uma cor aleatória usando a biblioteca math
+            document.getElementById("profileCard").style.backgroundColor = corAleatoria; //aplica a mudança de cor na página
         }
 
+        //Troca a foto de usuário
         function trocaFoto() {
-            const novaImagem = prompt("Digite o link da nova imagem:");
-            if (novaImagem) {
-                document.getElementById("imagemPerfil").src = novaImagem;
+            const novaImagem = prompt("Digite o link da nova imagem:"); //prompt para colocar o link da imagem
+            if (novaImagem) { //se nova imagem for detectada execute:
+                document.getElementById("imagemPerfil").src = novaImagem; //aplica a nova imagem do usuário
             }
         }
 
+        //Ao adicionar um novo hobby ele adiciona os elementos que possibilita excluir ele
         function adicionarEventosHobbie(elemento) {
-            elemento.addEventListener("click", () => {
+            elemento.addEventListener("click", () => { //quando clicar remove o elemento
                 elemento.remove();
             });
 
             elemento.addEventListener("mouseover", () => {
-                elemento.style.backgroundColor = "red";
+                elemento.style.backgroundColor = "red"; //quando passar por cima ele muda a cor para vermelho
                 elemento.style.color = "white";
             });
 
             elemento.addEventListener("mouseout", () => {
-                elemento.style.backgroundColor = "";
+                elemento.style.backgroundColor = ""; //quando tirar o mouse ele volta para a cor normal
                 elemento.style.color = "";
             });
         }
 
+        //Reseta a página para o estado inicial
         function resetarPagina() {
-            document.getElementById("profileName").textContent = "Nome: Meu Perfil";
+            document.getElementById("profileName").textContent = "Nome: Meu Perfil"; //elementos padrão do html
             document.getElementById("profileAge").textContent = "Idade: 18";
             document.getElementById("imagemPerfil").src = "https://via.placeholder.com/150";
             document.getElementById("profileCard").style.backgroundColor = "";
             
-            const hobbieList = document.getElementById("hobbieList");
+            const hobbieList = document.getElementById("hobbieList"); //reseta a lista de hobbies 
             hobbieList.innerHTML = "";
             const hobbiesIniciais = ["Leitura", "Esportes", "Música"];
             hobbiesIniciais.forEach(hobby => {
